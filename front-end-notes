@@ -43,4 +43,7 @@ to add bootstrap to the web page
 
 to use javascript 
 -----------------
+1. Use fetch api to consume an endpoint of your backend application
+2. Use innerHtml property on your html element to set the child content.
+
 
