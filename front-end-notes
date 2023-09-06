@@ -1,0 +1,46 @@
+front end application
+---------------------
+- ide used is VSCode
+- in VSCode we will install the Live server extension
+- the Live Server acts as the web server for the front end appln.
+- note that live server is not production grade
+- most commonly used production grade server for front end is nginx server
+- we are not working with nginx here
+
+technologies used
+------------------
+html
+	- to create the web page
+bootstrap
+	- a styling framework built on css
+javascript
+	- to maipulate the DOM
+	- to communicate with the backend application using fetch api
+
+types of front end application
+-------------------------------
+SPA  -Single Page Application
+	- Angular, React uses SPA
+MPA - Multi Page Application
+    - since we are using plain JS for front end we will work with MPA
+
+steps
+-----
+to create first web page
+-------------------------
+1. create a folder and open it in vscode
+2. go to extensions in vscode and install live server
+3. install pretty formatter(optional)
+4. create your first web page
+5. once finished, right click and open it with live server
+
+to add bootstrap to the web page
+--------------------------------
+1. i would use a CDN(Content Delivery Network) to include bootstrap in my web page
+2. many CDNs are available, we can use the MAXCDN provided by w3schools
+3. copy the 2 lines and put in the head section of html
+4. start using the bootstrap classes in your web page
+
+to use javascript 
+-----------------
+
