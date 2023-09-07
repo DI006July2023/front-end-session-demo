@@ -16,6 +16,7 @@ bootstrap
 javascript
 	- to maipulate the DOM
 	- to communicate with the backend application using fetch api
+    - could use jQuery to easily traverse the DOM(i have not used jQuery in the demo, instead JS is used)
 
 types of front end application
 -------------------------------

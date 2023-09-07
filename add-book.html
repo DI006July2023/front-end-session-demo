@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        />
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+    <body>
+        <script>
+            function addBook(){
+                // first lets construct the JS Object for the request body
+                let newBook = {
+                    bookId: 0,
+                    bookTitle: document.getElementById("bTitle").value,
+                    bookAuthorId: document.getElementById("bAuthor").value,
+                    bookGenre: document.getElementById("bGenre").value,
+                    bookImageUrl: document.getElementById("bImage").value,
+                    bookPublished: document.getElementById("bDate").value,
+                    bookCost: document.getElementById("bCost").value,
+                }
+                // use fetch api to add the book 
+                fetch('http://localhost:4545/books', {
+                    method: 'POST',
+                    body: JSON.stringify(newBook), // JSON.stringify() will convert JS object to JSON
+                    headers: { "Content-type": "application/json; charset=UTF-8" }
+                })
+                .then((response)=>response.json())
+                .then((data)=>console.log(data));
+            }
+            function loadAuthors(){
+            let content = '';
+            fetch('http://localhost:4545/authors')
+                .then((response)=>response.json())
+                .then((data)=>{
+                    console.log(data);
+                    for(let eachData of data){
+                        content += `<option value="${eachData.authorId}">${eachData.authorId}-${eachData.authorFirstName} ${eachData.authorLastName}</option>`;
+                    }
+                    document.getElementById("bAuthor").innerHTML = content;
+            })
+            }
+            loadAuthors();
+        </script>
+        <div class="container m-4">
+            <form>
+            <div class="card">
+                <div class="card-header bg-success text-light">
+                    <h2>Add A Book</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3 mt-3">
+                        <label for="bTitle" class="form-label">Book Title:</label>
+                        <input type="text" class="form-control" id="bTitle" placeholder="Enter Book Title" name="bookTitle">
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="bAuthor" class="form-label">Book Author:</label>
+                        <select class="form-select" id="bAuthor">
+                           
+                        </select>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="bCost" class="form-label">Book Cost:</label>
+                        <input type="text" class="form-control" id="bCost" placeholder="Enter Book Cost" name="bookCost">
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="bGenre" class="form-label">Book Genre:</label>
+                        <select class="form-select" id="bGenre">
+                            <option value="Commedy">Commedy</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Fiction">Fiction</option>
+                          </select>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="bDate" class="form-label">Book Published Date:</label>
+                        <input type="date" class="form-control" id="bDate" name="bookDate">
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="bImage" class="form-label">Book Image Url:</label>
+                        <input type="text" class="form-control" id="bImage" placeholder="Enter Book Image Url" name="bookImageUrl">
+                    </div>
+                </div>
+                <div class="card-footer bg-success">
+                    <button type="button" class="btn btn-light text-success" onClick="addBook()">Add Book</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        
+
+    </body>
+</html>

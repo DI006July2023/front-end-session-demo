@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <script>
+        function removeBook(bookId){
+            console.log(bookId);
+            fetch('http://localhost:4545/books/'+bookId, {method: 'DELETE'})
+                .then((response)=>loadBooks())
+        }
+
+        function loadBooks(){
+            let content = '';
+            fetch('http://localhost:4545/books')
+                .then((response)=>response.json())
+                .then((data)=>{
+                    console.log(data);
+                    content = ` <div class="row">`;
+                    for(let eachData of data){
+                        content += `<div class="col-3">
+                                        <div class="card m-2" height="1000px">
+                                            <img class="card-img-top" style="height:300px" src="${eachData.bookImageUrl}" alt="Card image">
+                                            <div class="card-body">
+                                                <h6 class="card-title">${eachData.bookTitle}</h6>
+                                                <p class="card-text">Book Cost: ${eachData.bookCost}</p>
+                                                <p class="card-text">Book Published: ${eachData.bookPublished}</p>
+                                                <button class="btn btn-primary">Edit</button>
+                                                <button class="btn btn-danger" onClick="removeBook(${eachData.bookId})">Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   `;
+                    }
+                    content +=` </div>`;
+                    document.getElementById("display").innerHTML = content;
+            })
+        }
+
+        loadBooks();
+    </script>
+
+   
+    <div class="container">
+        <h2>List Of Books</h2>
+        <div id="display">
+    
+        </div>
+    </div>
+    
+  </body>
+</html>
